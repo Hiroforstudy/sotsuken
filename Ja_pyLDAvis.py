@@ -34,11 +34,11 @@ def clean(doc):
 lines = [clean(line) for line in lines]
 
 # 文書-単語行列の作成
-vect = CountVectorizer(max_df=0.9, stop_words=None)
+vect = CountVectorizer(max_df=0.9, stop_words=None) # 
 data = vect.fit_transform(lines)
 
 # LDAの適用と学習
-lda = LatentDirichletAllocation(n_components=4, max_iter=40,
+lda = LatentDirichletAllocation(n_components=4, max_iter=40, #
                                 learning_method='online',
                                 learning_offset=50.,
                                 random_state=0)
