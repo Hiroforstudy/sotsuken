@@ -8,6 +8,7 @@ import re
 import nltk
 import MeCab
 nltk.download('wordnet')
+import matplotlib.pyplot as plt  # max_iterの適切な値を見極めるために必要
 
 # ファイルからデータを読み込む
 with open('mix_text.txt', 'r', encoding='utf-8') as f:
@@ -34,6 +35,26 @@ lines = [clean(line) for line in lines]
 # 文書-単語行列の作成
 vect = CountVectorizer(max_df=1.0, stop_words=None)
 data = vect.fit_transform(lines)
+
+# 最適なlearning_offsetの値をグラフから探る
+likelihoods = []
+max_iters_range = range(1, 51)
+
+for max_iter in max_iters_range:
+    lda = LatentDirichletAllocation(n_components=5, max_iter=max_iter,
+                                    learning_method='online',
+                                    learning_offset=10,
+                                    random_state=0)
+    lda.fit(data)
+    likelihood = lda.score(data)
+    likelihoods.append(likelihood)
+
+# 学習曲線をプロット
+plt.plot(max_iters_range, likelihoods, marker='o')
+plt.xlabel('max_iter')
+plt.ylabel('Log Likelihood')
+plt.title('LDA Learning Curve')
+plt.show()
 
 # 最適なパラメータでLDAの適用と学習
 lda = LatentDirichletAllocation(n_components=5, max_iter=40,
