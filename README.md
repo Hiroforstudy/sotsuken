@@ -1,5 +1,5 @@
 # Get_Conversation.py
-“REST API”を使い、任意のレポジトリのPull requestsのConversationで行われているやり取りを抽出するプログラム
+“REST API”を使い、任意のレポジトリのPull requestsのConversationで行われているやり取りを抽出するプログラム。
 # Ja_pyLDAvis.py & Ja_pyLDAvis_plus.py
 上記のプログラムで抽出されたやり取りをChatGPTを通して日本語で要約し、得られたデータセットをもとに"Jupyter Notebook上"でpyLDAvisを使用してトピックモデリングを行い、その結果を可視化するためのプログラム。Ja_pyLDAvis_plus.pyはJa_pyLDAvis.pyに適切なlearning_offsetの値をグラフを用いて調べるプログラムを足したもの。
 # mix_text.txt
